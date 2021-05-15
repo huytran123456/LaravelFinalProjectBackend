@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^7.4",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -17,7 +17,8 @@
         "laravel/passport": "^10.1",
         "laravel/tinker": "^2.5",
         "simplesoftwareio/simple-qrcode": "^4.2",
-        "squizlabs/php_codesniffer": "*"
+        "squizlabs/php_codesniffer": "*",
+      "ext-imagick": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

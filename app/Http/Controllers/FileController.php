@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FileRequest;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Image;
 
@@ -49,4 +50,9 @@ class FileController extends Controller
         return Storage::disk('huy')->download('42tpwq.png');
     }
 
+    public function get_avatar(Request $request)
+    {
+        //
+
+    }
 }

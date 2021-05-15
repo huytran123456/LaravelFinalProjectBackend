@@ -48,10 +48,11 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         //Custom your message here!
-        $message = $exception->getMessage()." This is my custom message.";
+        //$message = $exception->getMessage();
+        $message = "You need login to perform this action!";
 
         return $request->expectsJson()
-            ? response()->json(['message' => $message], 401)
+            ? response()->json(['errors' => $message], 401)
             : redirect()->guest(route('api/auth/login'));
     }
 }

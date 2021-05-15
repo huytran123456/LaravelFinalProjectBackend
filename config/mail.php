@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => 'mailgun',
 
     /*
     |--------------------------------------------------------------------------
@@ -49,7 +49,12 @@ return [
             'transport' => 'ses',
         ],
 
+//        'mailgun' => [
+//            'transport' => 'mailgun',
+//        ],
         'mailgun' => [
+            'domain' => env('MAILGUN_DOMAIN'),
+            'secret' => env('MAILGUN_SECRET'),
             'transport' => 'mailgun',
         ],
 

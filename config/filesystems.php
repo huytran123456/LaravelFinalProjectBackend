@@ -34,6 +34,14 @@ return [
             'driver' => 'local',
             'root'   => 'C:/xampp/htdocs',
         ],
+        'avatar' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/avatar'),
+        ],
+        'film_poster' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/film_poster'),
+        ],
 
         'local' => [
             'driver' => 'local',
@@ -71,8 +79,9 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
-        public_path('huy') => 'C:/xampp/htdocs',
+        public_path('storage')     => storage_path('app/public'),
+        public_path('avatar')      => storage_path('app/avatar'),
+        public_path('film_poster') => storage_path('app/film_poster'),
     ],
 
 ];

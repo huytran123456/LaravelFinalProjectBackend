@@ -31,6 +31,7 @@ class User extends Authenticatable
         'last_name',
         'phone',
         'password',
+        'avatar'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -50,33 +51,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Refactoring
-     * @param array $selectArray
-     * @param array $whereArray
-     * @return \Illuminate\Database\Query\Builder
-     */
-    public function getListUsers(array $selectArray, array $whereArray = [], array $joinTable = [])
-    {
-
-        $users = DB::table($this->alias())
-                   ->select($selectArray)
-                   ->where($whereArray);
-        if ($joinTable !== []) {
-            foreach ($joinTable as $j) {
-                $users = $users->leftJoin($j[0], $j[1], $j[2], $j[3]);
-            }
-        }
-
-        return $users;
-    }
-
-    /**
-     * Alias name for table
-     * @return string
-     */
-    protected function alias(): string
-    {
-        return $this->getTable() . ' as u';
-    }
 }

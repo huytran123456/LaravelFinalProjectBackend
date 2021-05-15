@@ -20,7 +20,6 @@ class UserController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-
     /**
      * @return \Illuminate\Http\JsonResponse
      */
@@ -55,15 +54,15 @@ class UserController extends Controller
         ];
 
         // Don't care
-        $model = new User();
-        $resultQuery = $model->getListUsers($select, $where, $joinTable)
-                             ->groupBy($groupBy)
-                             ->get();
+        $this->auxiliaryModel->setTableName('users', 'u');
+        $resultQuery = $this->auxiliaryModel->getListFromQuery($select, $where, $joinTable)
+                                            ->groupBy($groupBy)
+                                            ->get();
         $result = collect($resultQuery);
         $genders = config('datasources.genders');
         $countries = config('datasources.countries');
         $genders = collect($genders)->keyBy('gender_id');
-        $result = $result->map(function ($x) use ($genders, $countries) {
+        $result = $result->map(function ($x) use  ($genders, $countries) {
             $t = collect(json_decode($x->titles));
             $t = $t->sortBy('title_id')->values()->all();
             $x->titles = $t;
@@ -85,6 +84,13 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        //Select
+        $selectUser = ['email'];
+        //Where
+        $whereUser = [
+            ['email', '=', $request->email],
+            ['is_delete', '<>', '1']
+        ];
         //Create field
         $create = [
             'first_name',
@@ -136,10 +142,10 @@ class UserController extends Controller
         ];
 
         //Don't care
-        $model = new AuxiliaryModel('user_titles');
-        $result = $model->getListFromQuery('ut', $select, $where, $joinTable)
-                        ->groupBy($groupBy)
-                        ->first();
+        $this->auxiliaryModel->setTableName('user_titles', 'ut');
+        $result = $this->auxiliaryModel->getListFromQuery($select, $where, $joinTable)
+                                       ->groupBy($groupBy)
+                                       ->first();
         $genders = config('datasources.genders');
         $countries = config('datasources.countries');
         $genders = collect($genders)->keyBy('gender_id');
@@ -180,8 +186,8 @@ class UserController extends Controller
 
 
         //Ignore it if you dont change your structure
-        $model = new User();
-        $findUser = $model->getListUsers($select, $where);
+        $this->auxiliaryModel->setTableName('users');
+        $findUser = $this->auxiliaryModel->getListFromQuery($select, $where);
         $requestContent = $request->only($update);
         //remove null on content
         $requestContent = array_diff($requestContent, [null, ""]);
@@ -210,8 +216,8 @@ class UserController extends Controller
         ];
 
         //Ignore it if you dont change your structure
-        $model = new User();
-        $user = $model->getListUsers($select, $where);
+        $this->auxiliaryModel->setTableName('users');
+        $user = $this->auxiliaryModel->getListUsers($select, $where);
         // var_dump($user);die;
         $res = $user->update($destroy);
 

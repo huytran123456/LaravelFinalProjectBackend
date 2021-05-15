@@ -28,9 +28,13 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('users/uploadImg', [FileController::class, 'upload_image']);
     //Get image
     Route::get('users/getImg', [FileController::class, 'get_image']);
-    //Get film list
-    Route::get('film/getList', [\App\Http\Controllers\FilmController::class, 'index']);
+    //Get avatar
+    Route::get('users/getInfoUser', [\App\Http\Controllers\UserInfoController::class, 'getInfoUser']);
+    //Edit user
+    Route::post('users/editInfoUser', [\App\Http\Controllers\UserInfoController::class, 'editInfoUser']);
 });
+//Get film list
+Route::get('film/getList', [\App\Http\Controllers\FilmController::class, 'index']);
 // Save user
 Route::post('users', [UserController::class, 'store']);
 //Social login
@@ -43,3 +47,10 @@ Route::post('auth/login', [AuthController::class, 'login']);
 Route::get('users/genQrCode', [QrCodeController::class, 'getQrCode']);
 //Get user list
 Route::get('users', [UserController::class, 'index']);
+//Reset social password
+Route::post('resetSocialPassword', [AuthController::class, 'resetSocialPassword']);
+//Send mail
+Route::post('sendMail', [\App\Http\Controllers\UserInfoController::class, 'sendMail']);
+//Confirm passcode
+Route::post('changePass', [\App\Http\Controllers\UserInfoController::class, 'changePass']);
+

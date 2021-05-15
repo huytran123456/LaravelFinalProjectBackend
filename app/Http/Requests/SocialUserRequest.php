@@ -25,23 +25,25 @@ class SocialUserRequest extends FormRequest
     {
         return [
             //
-            'first_name' => 'required',
-            'last_name'  => 'required',
-            'email'      => 'required|email',
-            'phone'      => 'required',
-            'password'   => 'required'
+            'first_name'      => 'required',
+            'last_name'       => 'required',
+            'email'           => 'required|email',
+            'phone'           => 'required',
+            'password'        => 'required',
+            'social_platform' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'first_name.required' => 'A first_name is required.',
-            'last_name.required'  => 'A last_name is required.',
-            'email.required'      => 'An email is required.',
-            'email.email'         => 'An email is invalid.',
-            'phone.required'      => 'A phone is required.',
-            'password.required'   => 'A email is required.',
+            'first_name.required'      => 'A first_name is required.',
+            'last_name.required'       => 'A last_name is required.',
+            'email.required'           => 'An email is required.',
+            'email.email'              => 'An email is invalid.',
+            'phone.required'           => 'A phone is required.',
+            'password.required'        => 'A email is required.',
+            'social_platform.required' => 'Social platform is required'
         ];
     }
 }
