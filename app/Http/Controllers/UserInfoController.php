@@ -139,10 +139,10 @@ class UserInfoController extends Controller
         $updateContent = $request->only($updateUser);
 
 //        $img_name = $request['avatar']->getClientOriginalName();
-        $updateContent['avatar'] = md5($request['email']) . time() . '.' . $request['avatar']->extension();
+        $updateContent['avatar'] = $request['email'] . '/' . md5($request['email']) . time() . '.' . $request['avatar']->extension();
         $image = Image::make($request->file('avatar'));
 
-        $image->resize(225, null, function ($constraint) {
+        $image->resize(225, 225, function ($constraint) {
             $constraint->aspectRatio();
         })->encode();
         Storage::disk('avatar')->put($updateContent['avatar'], $image);

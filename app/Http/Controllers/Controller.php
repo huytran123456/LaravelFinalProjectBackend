@@ -13,7 +13,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     //Use for query
-    protected $auxiliaryModel;
+    protected AuxiliaryModel $auxiliaryModel;
 
     function __construct()
     {

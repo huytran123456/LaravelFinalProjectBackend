@@ -32,6 +32,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('users/getInfoUser', [\App\Http\Controllers\UserInfoController::class, 'getInfoUser']);
     //Edit user
     Route::post('users/editInfoUser', [\App\Http\Controllers\UserInfoController::class, 'editInfoUser']);
+    //Get order detail
+    Route::get('order/getDetail/{id}', [\App\Http\Controllers\OrderController::class, 'getDetail']);
+    //Make order
+    Route::post('order/makeOrder', [\App\Http\Controllers\OrderController::class, 'makeOrder']);
 });
 //Get film list
 Route::get('film/getList', [\App\Http\Controllers\FilmController::class, 'index']);
