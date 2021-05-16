@@ -188,7 +188,7 @@ return [
     |
     */
 
-    'aliases' => [
+    'aliases'       => [
 
         'App'          => Illuminate\Support\Facades\App::class,
         'Arr'          => Illuminate\Support\Arr::class,
@@ -230,5 +230,6 @@ return [
         'Image'        => Intervention\Image\Facades\Image::class,
         'QrCode'       => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
     ],
-
+    'log'           => 'daily',
+    'log_max_files' => 7,
 ];
